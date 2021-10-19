@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Карта РГАУ-МСХА им К.А. Тимирязева</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=1f81140c-a67d-4b34-bbbe-2dba0bd0002a&lang=ru_RU"
+            type="text/javascript"></script>
+    <style>
+		html {
+			height: 100%;
+			width: 100%;
+		}
+		body {
+			height: 100%;
+			width: 100%;
+			position: relative;
+			margin: 0;
+		}
+		#map {
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+	</style>
+    <script type="text/javascript"> ymaps.ready(init);
+
+
+
+function init() {
+    var myMap = new ymaps.Map('map', {
+        center: [55.831672, 37.554786],
+        zoom: 15.5,
+        controls: ['zoomControl', 'routePanelControl']
+    }),
+        myCollection = new ymaps.GeoObjectCollection(),
+        // Создаем массив с данными.
+        myPoints = [
+
+            { coords: [55.834416, 37.548573], text: 'Почвенно-агрономический музей имени В.Р. Вильямса, Прянишникова, 6' },
+            { coords: [55.831292, 37.551196], text: 'Музей истории МСХА, Тимирязевская улица, 45' },
+            { coords: [55.830560, 37.553383], text: 'Научно-художественный музей коневодства, Тимирязевская улица, 44' },
+            { coords: [55.835978, 37.566593], text: 'Музей животноводства имени Е.Ф. Лискуна, Лиственничная аллея, 14' },
+            { coords: [55.817987, 37.556271], text: 'Музей леса им. А.Р. Варгаса де Бедемара, ул. Вучетича, д. 46' },
+            { coords: [55.836595, 37.555984], text: 'Музей агроинженерии и техники имени В.П. Горячкина, ул. Прянишникова, д. 14' },
+            { coords: [55.830816, 37.553118], text: 'Музей Анатомии им. Б.К. Гиндце, ул. Тимирязевская, 44' },
+            { coords: [55.833673, 37.550917], text: 'Зоологический музей имени Н.М. Кулагина, Тимирязевская улица, 44' },
+            { coords: [55.834229, 37.547641], text: 'Геолого-минералогический музей, ул. Прянишникова, д. 6' },
+            { coords: [55.754917, 37.609101], text: 'Мемориальный музей-квартира К.А. Тимирязева, Романов переулок, 4' },
+			{ coords: [55.835569, 37.549157], text: 'Музей мелиорации и гидротехники имени А.Н. Костякова, ул. Прянишникова, д. 19' }
+        ];
+
+    // Заполняем коллекцию данными.
+    for (var i = 0, l = myPoints.length; i < l; i++) {
+        var point = myPoints[i];
+        myCollection.add(new ymaps.Placemark(
+            point.coords, {
+            balloonContentBody: point.text
+        }
+        ));
+    }
+
+    // Добавляем коллекцию меток на карту.
+    //myMap.geoObjects.add(myCollection);
+
+    // Создаем экземпляр класса ymaps.control.SearchControl
+    var mySearchControl = new ymaps.control.SearchControl({
+        options: {
+            // Заменяем стандартный провайдер данных (геокодер) нашим собственным.
+            provider: new CustomSearchProvider(myPoints),
+            // Не будем показывать еще одну метку при выборе результата поиска,
+            // т.к. метки коллекции myCollection уже добавлены на карту.
+            noPlacemark: true,
+            resultsPerPage: 5
+        }
+    });
+
+    // Добавляем контрол в верхний правый угол,
+    myMap.controls
+        .add(mySearchControl, { float: 'right' }),
+
+        objectManager = new ymaps.ObjectManager({
+            // Чтобы метки начали кластеризоваться, выставляем опцию.
+            clusterize: 1,
+            // ObjectManager принимает те же опции, что и кластеризатор.
+            gridSize: 8,
+            // Макет метки кластера pieChart.
+            clusterIconLayout: "default#pieChart"
+        });
+    myMap.geoObjects.add(objectManager);
+
+    var control = myMap.controls.get('routePanelControl');
+
+    control.options.set({
+        //Отключим автоматическую фокусировку на панели для построения маршрутов
+        autofocus: false
+    });
+
+    // Зададим состояние панели для построения машрутов.
+    control.routePanel.state.set({
+        // Тип маршрутизации.
+        type: 'masstransit',
+
+        // Адрес или координаты пункта отправления.
+
+
+        // Включим возможность задавать пункт отправления в поле ввода.
+        fromEnabled: true,
+        //Выключим возможность задавать пункт назначения в поле ввода.
+        toEnabled: true
+    });
+
+    // Зададим опции панели для построения машрутов.
+    control.routePanel.options.set({
+
+        // Запрещаем показ кнопки, позволяющей менять местами начальную и конечную точки маршрута.
+        // Включим определение адреса по координатам клика.
+        // Адрес будет автоматически подставляться в поле ввода на панели, а также в подпись метки маршрута.
+        reverseGeocoding: true,
+        // Зададим виды маршрутизации, которые будут доступны пользователям для выбора.
+        types: { masstransit: true, pedestrian: true, taxi: true }
+    });
+
+    // Создаем 2 пункта выпадающего списка
+    var listBoxItems = ['Общежитие', 'Корпус','Культура']
+        .map(function (title) {
+            return new ymaps.control.ListBoxItem({
+                data: {
+                    content: title
+                },
+                state: {
+                    selected: true
+                }
+            })
+        }),
+        // Теперь создадим список, содержащий 2 пункта
+        listBoxControl = new ymaps.control.ListBox({
+            data: {
+                content: 'Фильтр',
+                title: 'Фильтр'
+            },
+            items: listBoxItems,
+            state: {
+                // Признак, развернут ли список.
+                expanded: true,
+                filters: listBoxItems.reduce(function (filters, filter) {
+                    filters[filter.data.get('content')] = filter.isSelected();
+                    return filters;
+                }, {})
+            }
+        });
+
+
+    objectManager.add({
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature", "id": 1, "geometry": { "type": "Point", "coordinates": [55.834416, 37.548573] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Почвенно-агрономический музей имени В.Р. Вильямса</div><div class=\"address\">Прянишникова, 6</div>",
+                    "clusterCaption": "Культура", "hintContent": "Почвенно-агрономический музей имени В.Р. Вильямса", "iconCaption": "Почвенно-агрономический музей имени В.Р. Вильямса"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+            {
+                "type": "Feature", "id": 2, "geometry": { "type": "Point", "coordinates": [55.831292, 37.551196] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Музей истории МСХА</div><div class=\"address\">Тимирязевская улица, 45</div>",
+                    "clusterCaption": "Культура", "hintContent": "Музей истории МСХА", "iconCaption": "Музей истории МСХА"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+            {
+                "type": "Feature", "id": 3, "geometry": { "type": "Point", "coordinates": [55.830560, 37.553383] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Научно-художественный музей коневодства</div><div class=\"address\">Тимирязевская улица, 44</div>",
+                    "clusterCaption": "Культура", "hintContent": "Научно-художественный музей коневодства", "iconCaption": "Научно-художественный музей коневодства"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+            {
+                "type": "Feature", "id": 4, "geometry": { "type": "Point", "coordinates": [55.835978, 37.566593] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Музей животноводства имени Е.Ф. Лискуна</div><div class=\"address\">Лиственничная аллея, 14</div>",
+                    "clusterCaption": "Культура", "hintContent": "Музей животноводства имени Е.Ф. Лискуна", "iconCaption": "Музей животноводства имени Е.Ф. Лискуна"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+			{
+                "type": "Feature", "id": 5, "geometry": { "type": "Point", "coordinates": [55.817987, 37.556271] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Музей леса им. А.Р. Варгаса де Бедемара</div><div class=\"address\">ул. Вучетича, д. 46</div>",
+                    "clusterCaption": "Культура", "hintContent": "Музей леса им. А.Р. Варгаса де Бедемара", "iconCaption": "Музей леса им. А.Р. Варгаса де Бедемара"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+			{
+                "type": "Feature", "id": 6, "geometry": { "type": "Point", "coordinates": [55.836595, 37.555984] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Музей агроинженерии и техники имени В.П. Горячкина</div><div class=\"address\">ул. Прянишникова, д. 14</div>",
+                    "clusterCaption": "Культура", "hintContent": "Музей агроинженерии и техники имени В.П. Горячкина", "iconCaption": "Музей агроинженерии и техники имени В.П. Горячкина"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+			{
+                "type": "Feature", "id": 7, "geometry": { "type": "Point", "coordinates": [55.830816, 37.553118] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Музей Анатомии им. Б.К. Гиндце</div><div class=\"address\">ул. Тимирязевская, 44</div>",
+                    "clusterCaption": "Культура", "hintContent": "Музей Анатомии им. Б.К. Гиндце", "iconCaption": "Музей Анатомии им. Б.К. Гиндце"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+			{
+                "type": "Feature", "id": 8, "geometry": { "type": "Point", "coordinates": [55.831016, 37.552881] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Зоологический музей имени Н.М. Кулагина</div><div class=\"address\">ул. Тимирязевская, 44</div>",
+                    "clusterCaption": "Культура", "hintContent": "Зоологический музей имени Н.М. Кулагина", "iconCaption": "Зоологический музей имени Н.М. Кулагина"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+			{
+                "type": "Feature", "id": 9, "geometry": { "type": "Point", "coordinates": [55.834229, 37.547641] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Геолого-минералогический музей</div><div class=\"address\">ул. Прянишникова, д. 6</div>",
+                    "clusterCaption": "Культура", "hintContent": "Геолого-минералогический музей", "iconCaption": "Геолого-минералогический музей"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+			{
+                "type": "Feature", "id": 10, "geometry": { "type": "Point", "coordinates": [55.754917, 37.609101] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Мемориальный музей-квартира К.А. Тимирязева</div><div class=\"address\">Романов переулок, 4</div>",
+                    "clusterCaption": "Культура", "hintContent": "Мемориальный музей-квартира К.А. Тимирязева", "iconCaption": "Мемориальный музей-квартира К.А. Тимирязева"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            },
+			{
+                "type": "Feature", "id": 11, "geometry": { "type": "Point", "coordinates": [55.835569, 37.549157] }, "properties": {
+                    "class": "Культура", "balloonContentHeader": "<div class=\"object_name\">Музей мелиорации и гидротехники имени А.Н. Костякова</div><div class=\"address\">ул. Прянишникова, д. 19</div>",
+                    "clusterCaption": "Культура", "hintContent": "Музей мелиорации и гидротехники имени А.Н. Костякова", "iconCaption": "Музей мелиорации и гидротехники имени А.Н. Костякова"
+                }, "options": { "preset": "islands#redLeisureCircleIcon" }
+            }
+        ]
+    });
+
+}
+// Провайдер данных для элемента управления ymaps.control.SearchControl.
+// Осуществляет поиск геообъектов в по массиву points.
+// Реализует интерфейс IGeocodeProvider.
+function CustomSearchProvider(points) {
+    this.points = points;
+}
+
+// Провайдер ищет по полю text стандартным методом String.ptototype.indexOf.
+CustomSearchProvider.prototype.geocode = function (request, options) {
+    var deferred = new ymaps.vow.defer(),
+        geoObjects = new ymaps.GeoObjectCollection(),
+        // Сколько результатов нужно пропустить.
+        offset = options.skip || 0,
+        // Количество возвращаемых результатов.
+        limit = options.results || 20;
+
+    var points = [];
+    // Ищем в свойстве text каждого элемента массива.
+    for (var i = 0, l = this.points.length; i < l; i++) {
+        var point = this.points[i];
+        if (point.text.toLowerCase().indexOf(request.toLowerCase()) != -1) {
+            points.push(point);
+        }
+    }
+    // При формировании ответа можно учитывать offset и limit.
+    points = points.splice(offset, limit);
+    // Добавляем точки в результирующую коллекцию.
+    for (var i = 0, l = points.length; i < l; i++) {
+        var point = points[i],
+            coords = point.coords,
+            text = point.text;
+
+        geoObjects.add(new ymaps.Placemark(coords, {
+            name: text + ' name',
+            description: text + ' description',
+            balloonContentBody: '<p>' + text + '</p>',
+            boundedBy: [coords, coords]
+        }));
+    }
+
+    deferred.resolve({
+        // Геообъекты поисковой выдачи.
+        geoObjects: geoObjects,
+        // Метаинформация ответа.
+        metaData: {
+            geocoder: {
+                // Строка обработанного запроса.
+                request: request,
+                // Количество найденных результатов.
+                found: geoObjects.getLength(),
+                // Количество возвращенных результатов.
+                results: limit,
+                // Количество пропущенных результатов.
+                skip: offset
+            }
+        }
+    });
+
+    // Возвращаем объект-обещание.
+    return deferred.promise();
+};</script>
+</head>
+
+<body>
+<div id="map"></div>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_cam">
+
+    <fragment
+        android:id="@+id/navigation_cam"
+        android:name="com.example.myapplication.FragmentScanQr"
+        android:label="@string/title_cam"
+        tools:layout="@layout/fragment_scan_qr" >
+        <action
+            android:id="@+id/action_navigation_cam_to_fragmentScanQrResult2"
+            app:destination="@id/fragmentScanQrResult2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.example.myapplication.mapFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/fragmentScanQrResult2"
+        android:name="com.example.myapplication.FragmentScanQrResult"
+        android:label="FragmentScanQrResult" />
+</navigation>
