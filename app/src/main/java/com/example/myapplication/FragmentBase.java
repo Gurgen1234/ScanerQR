@@ -19,4 +19,5 @@ public class FragmentBase extends Fragment
 		super.onAttach( context );
 		activity = (MainActivity)context;
 	}
+
 }

@@ -1,21 +1,18 @@
  package com.example.myapplication;
 
-import org.denom.Binary;
+ import android.os.Bundle;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.*;
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
 
-import androidx.annotation.*;
+ import org.denom.Binary;
 
-import com.example.myapplication.FragmentBase;
-import com.example.myapplication.R;
-
-import team.sls.camera.CameraParameters;
-import team.sls.camera.CameraView;
-import team.sls.zxing.ZXing;
+ import team.sls.camera.CameraParameters;
+ import team.sls.camera.CameraView;
+ import team.sls.zxing.ZXing;
 
 public class FragmentScanQr extends FragmentBase
 {

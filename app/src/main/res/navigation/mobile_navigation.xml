@@ -14,7 +14,11 @@
             android:id="@+id/action_navigation_cam_to_fragmentScanQrResult2"
             app:destination="@id/fragmentScanQrResult2" />
     </fragment>
-
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="com.example.myapplication.FragmentSchedule"
+        android:label="@string/title_schedule"
+        tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/navigation_map"
         android:name="com.example.myapplication.mapFragment"

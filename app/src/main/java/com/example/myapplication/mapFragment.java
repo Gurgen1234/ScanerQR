@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.io.InputStream;
 public class mapFragment extends Fragment {
 
 
+    @SuppressLint("SuspiciousIndentation")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_map, container, false);
         WebView mapWebView = (WebView) root.findViewById(R.id.mapWebView);
