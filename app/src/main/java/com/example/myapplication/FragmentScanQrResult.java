@@ -71,4 +71,8 @@ public class FragmentScanQrResult extends FragmentBase
 				.into (webView);
 	}
 
+	@Override
+	public void onResume(View view) {
+
+	}
 }

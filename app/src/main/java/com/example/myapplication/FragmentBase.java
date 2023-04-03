@@ -4,11 +4,12 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-public class FragmentBase extends Fragment
+public abstract class FragmentBase extends Fragment
 {
 	protected MainActivity activity;
 
@@ -20,4 +21,5 @@ public class FragmentBase extends Fragment
 		activity = (MainActivity)context;
 	}
 
+	public abstract void onResume(View view);
 }

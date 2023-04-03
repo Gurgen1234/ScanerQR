@@ -77,4 +77,8 @@ public class FragmentSchedule extends FragmentBase {
         }
     }
 
+    @Override
+    public void onResume(View view) {
+
+    }
 }
