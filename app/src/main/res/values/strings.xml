@@ -4,6 +4,7 @@
     <string name="title_cam">Сканер</string>
     <string name="title_map">Карта</string>
     <string name="title_schedule">Рассписание</string>
+    <string name="title_achievements">Достижения</string>
     <string name="refKey">refKey</string>
     <string name="fragment_scan_qr">Считать QR</string>
     <string name="fragment_start">Demo QR</string>

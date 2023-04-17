@@ -15,5 +15,9 @@
         android:id="@+id/navigation_schedule"
         android:icon="@drawable/baseline_calendar_month_24"
         android:title="@string/title_schedule" />
+    <item
+        android:id="@+id/navigation_schedule"
+        android:icon="@drawable/baseline_calendar_month_24"
+        android:title="@string/title_achievements" />
 
 </menu>

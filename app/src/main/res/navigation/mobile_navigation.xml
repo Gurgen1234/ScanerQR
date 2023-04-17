@@ -28,4 +28,8 @@
         android:id="@+id/fragmentScanQrResult2"
         android:name="com.example.myapplication.FragmentScanQrResult"
         android:label="FragmentScanQrResult" />
+    <fragment
+        android:id="@+id/navigation_achivments"
+        android:name="com.example.myapplication.FragmentAchievements"
+        android:label="FragmentAchievements" />
 </navigation>

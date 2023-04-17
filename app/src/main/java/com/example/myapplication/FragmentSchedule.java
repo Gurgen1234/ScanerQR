@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.R;
 
 public class FragmentSchedule extends FragmentBase {
     private static String filePath = null;
@@ -49,7 +50,6 @@ public class FragmentSchedule extends FragmentBase {
     @Override
     public void onResume() {
         super.onResume();
-
         if (mSettings.contains(APP_PREFERENCES_COUNTER)) {
             // Получаем число из настроек
             filePath = mSettings. getString(APP_PREFERENCES_COUNTER, filePath);
@@ -75,10 +75,5 @@ public class FragmentSchedule extends FragmentBase {
                 filePath = resultData.getData().toString();
             }
         }
-    }
-
-    @Override
-    public void onResume(View view) {
-
     }
 }

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -69,10 +68,5 @@ public class FragmentScanQrResult extends FragmentBase
 				.resize (800, 800)
 				.centerCrop ()
 				.into (webView);
-	}
-
-	@Override
-	public void onResume(View view) {
-
 	}
 }

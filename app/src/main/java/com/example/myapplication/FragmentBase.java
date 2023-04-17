@@ -15,11 +15,14 @@ public abstract class FragmentBase extends Fragment
 
 	// -----------------------------------------------------------------------------------------------------------------
 	@Override
-	public void onAttach( @NonNull Context context )
+	public void onAttach( @NonNull Context context)
 	{
 		super.onAttach( context );
 		activity = (MainActivity)context;
 	}
 
-	public abstract void onResume(View view);
+	@Override
+	public void onResume(){
+		super.onResume();
+	}
 }
