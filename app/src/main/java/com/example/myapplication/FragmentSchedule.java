@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.R;
 
 public class FragmentSchedule extends FragmentBase {
     private static String filePath = null;

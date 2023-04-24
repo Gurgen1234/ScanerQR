@@ -29,7 +29,7 @@
         android:name="com.example.myapplication.FragmentScanQrResult"
         android:label="FragmentScanQrResult" />
     <fragment
-        android:id="@+id/navigation_achivments"
+        android:id="@+id/navigation_achievements"
         android:name="com.example.myapplication.FragmentAchievements"
         android:label="FragmentAchievements" />
 </navigation>

@@ -13,6 +13,7 @@ public abstract class FragmentBase extends Fragment
 {
 	protected MainActivity activity;
 
+
 	// -----------------------------------------------------------------------------------------------------------------
 	@Override
 	public void onAttach( @NonNull Context context)

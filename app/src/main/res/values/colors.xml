@@ -11,6 +11,12 @@
     <color name="colorRipple">#8EB5FF</color>
     <color name="colorPrimary">#0056FB</color>
     <color name="colorGray">#D5D5D5</color>
+    <color name="pg1">#4cb5f5</color>
+    <color name="pg2">#81c7f3</color>
+    <color name="pg3">#b7b8b6</color>
+    <color name="pg4">#ffef3b</color>
+    <color name="pg5">#12fb12</color>
+    <color name="pg6">#12fb12</color>
 
     <color name="colorTextLight">#660A1833</color>
 </resources>

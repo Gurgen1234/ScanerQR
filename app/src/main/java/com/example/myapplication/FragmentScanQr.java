@@ -26,7 +26,7 @@ public class FragmentScanQr extends FragmentBase {
     @Override
     public View onCreateView( @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState )
     {
-        View rootView = inflater.inflate( R.layout.fragment_scan_qr, container, false );
+        View rootView = inflater.inflate(R.layout.fragment_scan_qr, container, false );
         int permissionStatus = ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.CAMERA);
         if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this.getActivity(), new String[] {Manifest.permission.CAMERA},
