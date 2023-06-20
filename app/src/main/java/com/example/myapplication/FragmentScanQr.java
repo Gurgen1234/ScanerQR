@@ -2,7 +2,9 @@
 
  import android.Manifest;
  import android.content.Context;
+ import android.content.Intent;
  import android.content.pm.PackageManager;
+ import android.net.Uri;
  import android.os.Bundle;
  import android.view.LayoutInflater;
  import android.view.View;
@@ -12,6 +14,7 @@
  import androidx.annotation.Nullable;
  import androidx.core.app.ActivityCompat;
  import androidx.core.content.ContextCompat;
+ import androidx.fragment.app.FragmentManager;
 
  import org.denom.Binary;
 
@@ -33,7 +36,7 @@ public class FragmentScanQr extends FragmentBase {
                     0);
         }
         if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
-            cameraView = rootView.findViewById( R.id.cameraView );
+            cameraView = rootView.findViewById( R.id.cameraView);
         }
 
 
@@ -47,12 +50,12 @@ public class FragmentScanQr extends FragmentBase {
         {
             try {
                 Binary qrBytes = ZXing.qrToBinary(overlayBitmap);
-
                 activity.showFragmentScanQrResult(qrBytes);
                 return true;
             } catch (Throwable ignored) {
                 return false;
             }
+
         });
     }
 }

@@ -6,13 +6,21 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.content.res.loader.AssetsProvider;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import java.io.IOException;
 
 public class FragmentSchedule extends FragmentBase {
     private static String filePath = null;
@@ -20,28 +28,24 @@ public class FragmentSchedule extends FragmentBase {
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_COUNTER = "filePath";
 
-    @SuppressLint("SuspiciousIndentation")
+    @SuppressLint({"SuspiciousIndentation", "UseCompatLoadingForDrawables"})
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_schedule, container, false);
+        TextView text = (TextView) root.findViewById(R.id.textView2);
+        text.setText("Добро пожаловать!");
+        text.setTextSize(18);
+        text.setGravity(1);
         Button button = (Button) root.findViewById(R.id.button);
-        if (filePath != null){
-            button.setVisibility(View.GONE);
-        }
-        mSettings =
-                activity.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        ImageView img = (ImageView) root.findViewById(R.id.imageView);
+        img.setImageDrawable(root.getContext().getDrawable(R.drawable.hello));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("text/*");
-                startActivityForResult(intent, 1001);
-
-
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.timacad.ru/about/sveden/document/rezhim-zaniatii-obuchaiushchikhsia"));
+                activity.startActivity(intent);
             }
         });
+
 
         return root;
     }
@@ -49,30 +53,18 @@ public class FragmentSchedule extends FragmentBase {
     @Override
     public void onResume() {
         super.onResume();
-        if (mSettings.contains(APP_PREFERENCES_COUNTER)) {
-            // Получаем число из настроек
-            filePath = mSettings. getString(APP_PREFERENCES_COUNTER, filePath);
-            // Выводим на экран данные из настроек
-
-        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         // Запоминаем данные
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(APP_PREFERENCES_COUNTER, filePath);
-        editor.apply();
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         super.onActivityResult(requestCode, resultCode, resultData);
-        if (requestCode == 1001 && resultCode == RESULT_OK) {
-            if (resultData != null) {
-                filePath = resultData.getData().toString();
-            }
-        }
+
     }
 }

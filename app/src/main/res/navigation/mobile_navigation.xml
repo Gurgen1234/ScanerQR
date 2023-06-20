@@ -10,9 +10,6 @@
         android:name="com.example.myapplication.FragmentScanQr"
         android:label="@string/title_cam"
         tools:layout="@layout/fragment_scan_qr" >
-        <action
-            android:id="@+id/action_navigation_cam_to_fragmentScanQrResult2"
-            app:destination="@id/fragmentScanQrResult2" />
     </fragment>
     <fragment
         android:id="@+id/navigation_schedule"
@@ -25,11 +22,16 @@
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
     <fragment
-        android:id="@+id/fragmentScanQrResult2"
+        android:id="@+id/fragmentScanQrResult"
         android:name="com.example.myapplication.FragmentScanQrResult"
         android:label="FragmentScanQrResult" />
     <fragment
         android:id="@+id/navigation_achievements"
         android:name="com.example.myapplication.FragmentAchievements"
         android:label="FragmentAchievements" />
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.example.myapplication.FragmentChat"
+        android:label="FragmentChat" />
+
 </navigation>

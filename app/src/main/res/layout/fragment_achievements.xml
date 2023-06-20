@@ -8,13 +8,60 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progressDrawable="@drawable/progress_bar_style"
         android:layout_width="209dp"
         android:layout_height="46dp"
+        android:progressDrawable="@drawable/progress_bar_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099"/>
+        app:layout_constraintVertical_bias="0.208" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="209dp"
+        android:layout_height="46dp"
+        android:progressDrawable="@drawable/progress_bar_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.351" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="209dp"
+        android:layout_height="46dp"
+        android:progressDrawable="@drawable/progress_bar_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.484" />
+
+    <ProgressBar
+        android:id="@+id/progressBar4"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="209dp"
+        android:layout_height="46dp"
+        android:progressDrawable="@drawable/progress_bar_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.618" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.074" />
 </androidx.constraintlayout.widget.ConstraintLayout>

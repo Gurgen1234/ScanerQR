@@ -19,5 +19,9 @@
         android:id="@+id/navigation_achievements"
         android:icon="@drawable/baseline_task_alt_24"
         android:title="@string/title_achievements" />
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/baseline_chat_bubble_outline_24"
+        android:title="@string/title_chat" />
 
 </menu>
