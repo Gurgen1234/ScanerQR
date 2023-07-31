@@ -8,9 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +27,8 @@ import com.squareup.picasso.Picasso;
 
 import org.denom.Binary;
 
+import java.io.IOException;
+
 public class ActivityResult extends AppCompatActivity
 {
     TextView header;
@@ -35,6 +39,9 @@ public class ActivityResult extends AppCompatActivity
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
     String scannedBytes;
+    String visited;
+
+    String buildingClass;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -60,23 +67,38 @@ public class ActivityResult extends AppCompatActivity
         // определяем, какие столбцы из курсора будут выводиться в ListView
         // создаем адаптер, передаем в него курсор
         userCursor.moveToFirst();
-//        int id = Integer.getInteger(userCursor.getString(0));
-        header.setText(userCursor.getString(1));
+        visited = userCursor.getString(4);
         textView.setText(userCursor.getString(2));
+        buildingClass = userCursor.getString(3);
+
         Picasso.get()
                 .load(userCursor.getString(5))
                 .resize(800, 800)
                 .centerCrop()
                 .into(webView);
+        if (visited.equals("-")){
+            header.setText("Поздавляем вы открыли новое здание!!!\n" + userCursor.getString(1));
+            header.setTextColor(Color.RED);
+            try {
+                setVisited();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            header.setText(userCursor.getString(1));
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // todo: goto back activity from here
-
                 Intent intent = new Intent(ActivityResult.this, MainActivity.class);
-//                intent.addFlags();
+                if (visited.equals("+")) {
+                    intent.putExtra("acive",buildingClass);
+                }
+                db.close();
+                userCursor.close();
                 startActivity(intent);
                 finish();
                 return true;
@@ -84,5 +106,11 @@ public class ActivityResult extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void setVisited() throws IOException {
+        ContentValues cv = new ContentValues();
+        cv.put("visited","+");
+        String id = "_id";
+        db.update("DT", cv,id + "=" + scannedBytes, null);
     }
 }

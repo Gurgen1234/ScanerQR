@@ -18,20 +18,17 @@
         tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.example.myapplication.mapFragment"
+        android:name="com.example.myapplication.FragmentMap"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
     <fragment
-        android:id="@+id/fragmentScanQrResult"
-        android:name="com.example.myapplication.FragmentScanQrResult"
-        android:label="FragmentScanQrResult" />
-    <fragment
         android:id="@+id/navigation_achievements"
         android:name="com.example.myapplication.FragmentAchievements"
-        android:label="FragmentAchievements" />
+        android:label="Достижения" />
     <fragment
         android:id="@+id/navigation_chat"
         android:name="com.example.myapplication.FragmentChat"
-        android:label="FragmentChat" />
+        android:label="Мессенджер"
+        android:layout_marginBottom="?attr/actionBarSize"/>
 
 </navigation>

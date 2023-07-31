@@ -32,17 +32,24 @@ public class FragmentSchedule extends FragmentBase {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_schedule, container, false);
         TextView text = (TextView) root.findViewById(R.id.textView2);
-        text.setText("Добро пожаловать!");
+        String s = "Цифровой университет!!!";
+        text.setText("Добро пожаловать в \n" + s);
         text.setTextSize(18);
         text.setGravity(1);
         Button button = (Button) root.findViewById(R.id.button);
+        Button button1 = (Button) root.findViewById(R.id.button2);
         ImageView img = (ImageView) root.findViewById(R.id.imageView);
         img.setImageDrawable(root.getContext().getDrawable(R.drawable.hello));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.timacad.ru/about/sveden/document/rezhim-zaniatii-obuchaiushchikhsia"));
-                activity.startActivity(intent);
+                activity.showFragmentBr("https://www.timacad.ru/about/sveden/document/rezhim-zaniatii-obuchaiushchikhsia");
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.showFragmentBr("https://www.timacad.ru/news");
             }
         });
 

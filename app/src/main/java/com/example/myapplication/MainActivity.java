@@ -46,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    public void showFragmentBr(String href) {
+        Intent intj = new Intent(this, BrActivity.class);
+        intj.putExtra("href", href);
+        startActivity(intj);
+        finish();
+    }
+    public String getAchive(){
+        try {
+            return getIntent().getExtras().getString("achiv");
+        }
+        catch (NullPointerException e){
+          return null;
+        }
+    }
+
     // ----------------------------------------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------------------------------------

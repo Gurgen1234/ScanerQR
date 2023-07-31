@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class mapFragment extends Fragment {
+public class FragmentMap extends Fragment {
 
 
     @SuppressLint("SuspiciousIndentation")

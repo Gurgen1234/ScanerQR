@@ -7,16 +7,31 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="267dp"
-        android:layout_height="63dp"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="?attr/actionBarSize"
         android:onClick="onClick"
-        android:text="Открыть рассписание"
+        android:text="Открыть расписание"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875" />
+        app:layout_constraintVertical_bias="0.732" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:onClick="onClick"
+        android:text="Открыть новости"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.914" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -24,17 +39,21 @@
         android:layout_height="253dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.32"
+        app:layout_constraintVertical_bias="0.209"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="205dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="307dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:text="TextView"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
