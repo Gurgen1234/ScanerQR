@@ -16,24 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication" >
         <activity
-            android:name=".BrActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ActivitivyNews"
-            android:exported="false"
-            android:label="@string/title_activity_activitivy_news"
-            android:theme="@style/Theme.MyApplication" />
-        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ActivityResult" />
+        <activity android:name=".BrActivity"/>
+        <activity android:name=".NoteActivity"/>
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

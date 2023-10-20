@@ -38,6 +38,7 @@ public class FragmentSchedule extends FragmentBase {
         text.setGravity(1);
         Button button = (Button) root.findViewById(R.id.button);
         Button button1 = (Button) root.findViewById(R.id.button2);
+        Button button2 = (Button) root.findViewById(R.id.button3);
         ImageView img = (ImageView) root.findViewById(R.id.imageView);
         img.setImageDrawable(root.getContext().getDrawable(R.drawable.hello));
         button.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +51,13 @@ public class FragmentSchedule extends FragmentBase {
             @Override
             public void onClick(View v) {
                 activity.showFragmentBr("https://www.timacad.ru/news");
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.showFragmenNote();
             }
         });
 

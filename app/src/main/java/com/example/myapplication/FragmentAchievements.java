@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,15 +44,23 @@ public class FragmentAchievements extends FragmentBase {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_achievements, container, false);
         rootView.setBackgroundColor(Color.WHITE);
+        TextView bt = (TextView) rootView.findViewById(R.id.textView6);
+        bt.setText("100");
+        bt.setTextColor(Color.BLACK);
+        Toast.makeText(this.getContext(), "Вы можете увидеть пройденныеквесты на вкладке 'Пройденные'", Toast.LENGTH_LONG).show();
         pbHorizontalAllBuild = (ProgressBar) rootView.findViewById(R.id.progressBar);
         pbHorizontalHotel = (ProgressBar) rootView.findViewById(R.id.progressBar2);
         pbHorizontalSince = (ProgressBar) rootView.findViewById(R.id.progressBar3);
         pbHorizontalCulture = (ProgressBar) rootView.findViewById(R.id.progressBar4);
         databaseHelper = new DBHelper(this.getContext());
         textViewAll = (TextView) rootView.findViewById(R.id.textView);
+        textViewAll.setTextColor(Color.BLACK);
         textViewHotel = (TextView) rootView.findViewById(R.id.textView3);
+        textViewHotel.setTextColor(Color.BLACK);
         textViewSince = (TextView) rootView.findViewById(R.id.textView5);
+        textViewSince.setTextColor(Color.BLACK);
         textViewCulture = (TextView) rootView.findViewById(R.id.textView4);
+        textViewCulture.setTextColor(Color.BLACK);
         return rootView;
     }
 
@@ -65,22 +75,23 @@ public class FragmentAchievements extends FragmentBase {
         }
         pbHorizontalAllBuild.setMax(getMaxCount(""));
         pbHorizontalAllBuild.setProgress(getVisitedCount(""));
-        textViewAll.setText("Всего " + getVisitedCount("") + "/"+ getMaxCount(""));
+        textViewAll.setText("Посещенные объекты" + getVisitedCount("") + "/"+ getMaxCount(""));
 
         pbHorizontalHotel.setMax(getMaxCount("WHERE class = 'Общежитие'"));
         pbHorizontalHotel.setProgress(getVisitedCount("class = 'Общежитие' AND"));
-        textViewHotel.setText("Общежитий "+ getVisitedCount("class = 'Общежитие' AND") +"/"+ getMaxCount("WHERE class = 'Общежитие'"));
+        textViewHotel.setText("Посещено общежитий "+ getVisitedCount("class = 'Общежитие' AND") +"/"+ getMaxCount("WHERE class = 'Общежитие'"));
 
         pbHorizontalSince.setMax(getMaxCount("WHERE class = 'Корпус'"));
         pbHorizontalSince.setProgress(getVisitedCount("class = 'Корпус' AND"));
-        textViewSince.setText("Корпусов "+ getVisitedCount("class = 'Корпус' AND") +"/" + getMaxCount("WHERE class = 'Корпус'") );
+        textViewSince.setText("Посещено корпусов "+ getVisitedCount("class = 'Корпус' AND") +"/" + getMaxCount("WHERE class = 'Корпус'") );
 
         pbHorizontalCulture.setMax(getMaxCount("WHERE class = 'Культура'"));
         pbHorizontalCulture.setProgress(getVisitedCount("class = 'Культура' AND"));
-        textViewCulture.setText("Кульурных объектов "+ getVisitedCount("class = 'Культура' AND") +"/"+ getMaxCount("WHERE class = 'Культура'"));
+        textViewCulture.setText("Посещено кульурных объектов "+ getVisitedCount("class = 'Культура' AND") +"/"+ getMaxCount("WHERE class = 'Культура'"));
 
         databaseHelper.close();
     }
+
 
     public Integer getMaxCount(String buildClass) {
         String a = "SELECT COUNT() FROM DT " + buildClass + ";";

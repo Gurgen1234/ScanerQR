@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intj);
         finish();
     }
+    public void showFragmenNote() {
+        Intent intj = new Intent(this, NoteActivity.class);
+        startActivity(intj);
+        finish();
+    }
     public String getAchive(){
         try {
             return getIntent().getExtras().getString("achiv");

@@ -30,5 +30,4 @@
         android:name="com.example.myapplication.FragmentChat"
         android:label="Мессенджер"
         android:layout_marginBottom="?attr/actionBarSize"/>
-
 </navigation>

@@ -6,6 +6,7 @@
     <string name="title_schedule">Расписание</string>
     <string name="title_achievements">Достижения</string>
     <string name="title_chat">Мессенджер</string>
+    <string name="title_note">Заметки</string>
     <string name="refKey">refKey</string>
     <string name="title_activity_activitivy_news">ActivitivyNews</string>
 </resources>
